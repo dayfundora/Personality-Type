@@ -74,18 +74,3 @@ def make_matrix(vectorize_like_tfidf):
     write_to_xlsx(matrix, traits, features, 'correlation_{0}.xlsx'.format(vector_type))
     #write_to_xlsx(infogain, traits, features, 'infogain_{0}.xlsx'.format(vector_type))
     return (matrix, infogain)
-
-
-start =  time.time()
-
-print('Correlation_matriz vectorizing with tfidf')
-m1 = make_matrix(True)
-print(m1)
-input('time = {0}'.format(time.time() - start))
-
-print('\n\n')
-
-m2 = make_matrix(False)
-print('Correlation_matriz vectorizing with liwc')
-print(m2)
-input('time = {0}'.format(time.time() - start))
