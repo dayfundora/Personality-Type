@@ -45,14 +45,7 @@ def correlate(mx, features_names, xlabel, regression = False):
             r, pval = pearsonr(col,y) #spearmanr(col,y).correlation
 
             print('r={0}  pval={1}'.format(r,pval))
-            
-            if abs(r) > 0.7:
-                plt.scatter(col,y)
-                plt.title('Termino = {0}    Parametro = {1}'.format(features_names[i], trait), fontsize = 18, y = 1.03)
-                plt.xlabel(xlabel, fontsize = 14)
-                plt.ylabel('{0}_scores'.format(trait), fontsize = 14)
-                plt.show()
-                            
+
             matrix[i].append(r)
             pvalues[i].append(pval)
 
