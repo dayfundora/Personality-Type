@@ -67,3 +67,10 @@ def correlate(mx, features_names, xlabel, regression = False):
     print('time = {0}'.format(time.time() - start)) 
     return (matrix, None)
 
+def make_matrix(vectorize_like_tfidf):
+    mx, features, xlabel = extract_vectorized_elements(vectorize_like_tfidf)
+    matrix, infogain = correlate(mx, features, xlabel)
+    vector_type = 'tfidf' if vectorize_like_tfidf else 'liwc'
+    write_to_xlsx(matrix, traits, features, 'correlation_{0}.xlsx'.format(vector_type))
+    #write_to_xlsx(infogain, traits, features, 'infogain_{0}.xlsx'.format(vector_type))
+    return (matrix, infogain)
