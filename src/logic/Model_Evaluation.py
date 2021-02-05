@@ -27,3 +27,25 @@ def prep_data(trait,dp, regression=False, model_comparison=False):
         y = df_status[y_column]
 
         return X, y
+
+def extract_vectorized_elements(dp, tfidf_features= False):
+    
+    corpus = dp.extract_text_from_corpus()['STATUS']
+
+    mx = None
+    features = None
+    xlabel = None
+
+    if tfidf_features:
+        tfidf = TfidfVectorizer(stop_words='english', strip_accents='ascii')
+        mx = tfidf.fit_transform(corpus).toarray()
+        features = tfidf.get_feature_names()
+        xlabel = 'Tfidf_features'
+    else:
+        liwc = LIWCVectorizer()
+        mx = liwc.vectorize_docs(corpus)
+        features = liwc.features
+        xlabel = 'LIWC_features'
+
+    return mx, features, xlabel
+
