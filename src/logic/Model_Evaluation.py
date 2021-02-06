@@ -22,6 +22,7 @@ class Model_Evaluation():
         self.trait = trait
         self.model_dic = {
             'LogisticRegression': LogisticRegression(),
+            'RandomForestClassifier': RandomForestClassifier(max_features='sqrt', n_estimators=110),
             'MultinomialNB': MultinomialNB(),
             'GradientBoostingClassifier': GradientBoostingClassifier(),
             'SVC': SVC(),
@@ -33,6 +34,7 @@ class Model_Evaluation():
 
         self.models = [
             ('LogisticRegression', False), 
+            ('RandomForestClassifier', False), 
             ('MultinomialNB',False), 
             ('GradientBoostingClassifier',False), 
             ('SVC', False), ('LinearRegression', True), 
