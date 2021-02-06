@@ -15,6 +15,31 @@ from liwc_vectorizer import LIWCVectorizer
 import warnings
 warnings.filterwarnings("ignore")
 
+class Model_Evaluation():
+    def __init__(self, X, Y, trait):
+        self.X = X
+        self.Y = Y
+        self.trait = trait
+        self.model_dic = {
+            'LogisticRegression': LogisticRegression(),
+            'MultinomialNB': MultinomialNB(),
+            'GradientBoostingClassifier': GradientBoostingClassifier(),
+            'SVC': SVC(),
+            'LinearRegression': LinearRegression(),
+            'Ridge': Ridge(),
+            'SGDRegressor': SGDRegressor(),
+        }
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, Y, test_size=0.34, random_state=32)
+
+        self.models = [
+            ('LogisticRegression', False), 
+            ('MultinomialNB',False), 
+            ('GradientBoostingClassifier',False), 
+            ('SVC', False), ('LinearRegression', True), 
+            ('Ridge', True), 
+            ('SGDRegressor', True)
+            ]
+    
 def prep_data(trait,dp, regression=False, model_comparison=False):
         df_status = dp.extract_text_from_corpus()
         X = df_status['STATUS']
