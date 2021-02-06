@@ -27,6 +27,13 @@ class Model_Evaluation():
             'GradientBoostingClassifier': GradientBoostingClassifier(),
             'SVC': SVC(),
             'LinearRegression': LinearRegression(),
+            'RandomForestRegressor' : RandomForestRegressor(
+                 bootstrap=True,
+                 # max_depth=50,
+                 max_features='sqrt',
+                 min_samples_leaf=1,
+                 min_samples_split=2,
+                 n_estimators= 200),
             'Ridge': Ridge(),
             'SGDRegressor': SGDRegressor(),
         }
@@ -38,6 +45,7 @@ class Model_Evaluation():
             ('MultinomialNB',False), 
             ('GradientBoostingClassifier',False), 
             ('SVC', False), ('LinearRegression', True), 
+            ('RandomForestRegressor', True), 
             ('Ridge', True), 
             ('SGDRegressor', True)
             ]
