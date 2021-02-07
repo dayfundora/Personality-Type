@@ -59,9 +59,16 @@ class Model_Evaluation():
             model = self.model_dic[model_name]
             model.fit(self.X_train, self.y_train)
 
-            y_pred = model.predict(self.X_test)
-            y_true = self.y_test
-            mse = -np.mean(cross_validate(model, self.X_test, self.y_test, scoring='neg_mean_squared_error', cv=10)['test_score'])
+            if regression:
+                y_pred = model.predict(self.X_test)
+                y_true = self.y_test
+                mse = -np.mean(cross_validate(model, self.X_test, self.y_test, scoring='neg_mean_squared_error', cv=10)['test_score'])
+            else:
+                accuracy_score = np.mean(cross_validate(model, self.X_test, self.y_test, cv=10)['test_score'])
+                accuracy_scores.append(accuracy_score)
+
+                f_score = np.mean(cross_validate(model, self.X_test, self.y_test, scoring='f1', cv=10)['test_score'])
+                f1_scores.append(f_score)
 
 def prep_data(trait,dp, regression=False, model_comparison=False):
         df_status = dp.extract_text_from_corpus()
