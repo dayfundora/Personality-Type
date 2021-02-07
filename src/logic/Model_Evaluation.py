@@ -50,6 +50,19 @@ class Model_Evaluation():
             ('SGDRegressor', True)
             ]
     
+    def compare_scores(self, save):
+        
+        accuracy_scores = []
+        f1_scores = []
+
+        for model_name, regression in self.models:
+            model = self.model_dic[model_name]
+            model.fit(self.X_train, self.y_train)
+
+            y_pred = model.predict(self.X_test)
+            y_true = self.y_test
+            mse = -np.mean(cross_validate(model, self.X_test, self.y_test, scoring='neg_mean_squared_error', cv=10)['test_score'])
+
 def prep_data(trait,dp, regression=False, model_comparison=False):
         df_status = dp.extract_text_from_corpus()
         X = df_status['STATUS']
