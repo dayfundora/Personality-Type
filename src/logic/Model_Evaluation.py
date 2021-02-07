@@ -72,6 +72,9 @@ class Model_Evaluation():
 
         best_accuracy_score = max(accuracy_scores)
         best_accuracy_model, d = self.models[accuracy_scores.index(best_accuracy_score)]
+        
+        best_f1_score = max(f1_scores)
+        best_f1_model, r = self.models[f1_scores.index(best_f1_score)]
 
 def prep_data(trait,dp, regression=False, model_comparison=False):
         df_status = dp.extract_text_from_corpus()
