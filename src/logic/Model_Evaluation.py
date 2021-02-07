@@ -70,6 +70,9 @@ class Model_Evaluation():
                 f_score = np.mean(cross_validate(model, self.X_test, self.y_test, scoring='f1', cv=10)['test_score'])
                 f1_scores.append(f_score)
 
+        best_accuracy_score = max(accuracy_scores)
+        best_accuracy_model, d = self.models[accuracy_scores.index(best_accuracy_score)]
+
 def prep_data(trait,dp, regression=False, model_comparison=False):
         df_status = dp.extract_text_from_corpus()
         X = df_status['STATUS']
