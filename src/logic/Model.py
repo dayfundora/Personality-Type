@@ -16,3 +16,8 @@ class Model():
         self.tfidf = TfidfVectorizer(stop_words='english', strip_accents='ascii')
         self.liwc = LIWCVectorizer()
 
+    def fit(self, X, y, regression=True):
+        X = self.tfidf.fit_transform(X)
+
+        self.rfc = self.rfc.fit(X, y)
+
