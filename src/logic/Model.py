@@ -24,4 +24,9 @@ class Model():
     def predict(self, X, regression=True):
         X = self.tfidf.transform(X)
 
-        return self.rfr.predict(X)
+        return self.rfc.predict(X)
+    
+    def predict_proba(self, X, regression=False):
+        X = self.tfidf.transform(X)
+        
+        return self.rfc.predict_proba(X)
