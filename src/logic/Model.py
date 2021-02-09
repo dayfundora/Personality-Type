@@ -21,3 +21,7 @@ class Model():
 
         self.rfc = self.rfc.fit(X, y)
 
+    def predict(self, X, regression=True):
+        X = self.tfidf.transform(X)
+
+        return self.rfr.predict(X)
