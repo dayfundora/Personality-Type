@@ -17,15 +17,25 @@ class Model():
         self.liwc = LIWCVectorizer()
 
     def fit(self, X, y, regression=True):
-        X = self.tfidf.fit_transform(X)
-
+        if self.type == 'tfidf':
+            X = self.tfidf.fit_transform(X) # devuelve la matriz termino documento
+        elif self.type == 'liwc':
+            X = self.liwc.vectorize_docs(X)
+        else:
+            raise Exception('Error!!!!!!!!!!!!!!!!')
+            
         if regression:
             self.rfr = self.rfr.fit(X, y)
         else:
             self.rfc = self.rfc.fit(X, y)
 
     def predict(self, X, regression=True):
-        X = self.tfidf.transform(X)
+        if self.type == 'tfidf':
+            X = self.tfidf.transform(X) # devuelve la matriz termino documento
+        elif self.type == 'liwc':
+            X = self.liwc.vectorize(X)
+        else:
+            raise Exception('Error!!!!!!!!!!!!!!!!')
 
         if regression:
             return self.rfr.predict(X)
