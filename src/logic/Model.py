@@ -19,14 +19,24 @@ class Model():
     def fit(self, X, y, regression=True):
         X = self.tfidf.fit_transform(X)
 
-        self.rfc = self.rfc.fit(X, y)
+        if regression:
+            self.rfr = self.rfr.fit(X, y)
+        else:
+            self.rfc = self.rfc.fit(X, y)
 
     def predict(self, X, regression=True):
         X = self.tfidf.transform(X)
 
-        return self.rfc.predict(X)
+        if regression:
+            return self.rfr.predict(X)
+        else:
+            return self.rfc.predict(X)
     
     def predict_proba(self, X, regression=False):
         X = self.tfidf.transform(X)
+      
+        if regression:
+            raise ValueError('Cannot predict probabilites of a regression!')
+        else:
+            return self.rfc.predict_proba(X)
         
-        return self.rfc.predict_proba(X)
