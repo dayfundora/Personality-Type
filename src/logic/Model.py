@@ -67,3 +67,5 @@ def train_models(vectorizer='tfidf'):
         print('Fitting trait ' + trait + ' categorical model...')
         model.fit(X_categorical, y_categorical, regression=False)
         print('Done!')
+        with open('logic/models/{1}_categorical_model_{0}.pkl'.format(vectorizer, trait), 'wb') as f:
+            pickle.dump(model, f)
