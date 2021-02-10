@@ -50,3 +50,14 @@ class Model():
         else:
             return self.rfc.predict_proba(X)
         
+def train_models(vectorizer='tfidf'):
+    traits = ['OPN', 'CON', 'EXT', 'AGR', 'NEU']
+    model = Model(vectorizer)
+
+    for trait in traits:
+        dp = DataPrep()
+        X_regression, y_regression = dp.prep_data(trait, regression=True, model_comparison=False)        
+        X_categorical, y_categorical = dp.prep_data(trait, regression=False, model_comparison=False)
+        
+        model.fit(X_regression, y_regression, regression=True)
+        model.fit(X_categorical, y_categorical, regression=False)
