@@ -52,6 +52,7 @@ class Model():
         
 def train_models(vectorizer='tfidf'):
     traits = ['OPN', 'CON', 'EXT', 'AGR', 'NEU']
+    print('Vectorizer = {0}'.format(vectorizer))
     model = Model(vectorizer)
 
     for trait in traits:
@@ -59,5 +60,10 @@ def train_models(vectorizer='tfidf'):
         X_regression, y_regression = dp.prep_data(trait, regression=True, model_comparison=False)        
         X_categorical, y_categorical = dp.prep_data(trait, regression=False, model_comparison=False)
         
+        
+        print('Fitting trait ' + trait + ' regression model...')
         model.fit(X_regression, y_regression, regression=True)
+        print('Done!')
+        print('Fitting trait ' + trait + ' categorical model...')
         model.fit(X_categorical, y_categorical, regression=False)
+        print('Done!')
