@@ -46,3 +46,10 @@ def show(data, foobar, feature_id=None, verbose=0, solid=False, random_seed=43):
                 
                 plt.scatter(value[:,fi], value[:,fj], **kwargs)     
     plt.show()
+
+def plot_to2(X, y):
+    to_plot = PCA(2).fit_transform(X)
+
+    plt.scatter(to_plot[:,0], to_plot[:,1], c=y, cmap=plt.cm.Paired)
+    plt.title('Actual labels')
+    plt.show()
