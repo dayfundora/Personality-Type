@@ -66,12 +66,12 @@ def learning_curves(estimator, X, y, cv, trait, vectorizer):
     train_series_mean = pd.Series(train_scores_mean, index = train_sizes)
     validation_series_mean = pd.Series(validation_scores_mean, index = train_sizes)
 
-    
+    '''
     print('train_size = {0}'.format(train_sizes))
     print('Mean training scores\n\n', train_series_mean)
     print('-' * 20)
     print('\nMean validation scores\n\n', validation_series_mean)
-    
+    '''
 
     m1 = train_scores_mean.mean()
     m2 = validation_scores_mean.mean()
