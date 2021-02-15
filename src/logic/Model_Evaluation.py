@@ -140,3 +140,21 @@ def extract_vectorized_elements(dp, tfidf_features= False):
 
     return mx, features, xlabel
 
+
+if __name__ == '__main__':
+    traits = ['OPN', 'CON', 'EXT', 'AGR', 'NEU']
+    save = open('data/Compare_Scores.txt', 'w')  
+    
+    for trait in traits:
+        dp = dp = DataPrep()
+        X, t, x = extract_vectorized_elements(dp)
+        z, Y = prep_data(trait, dp)
+        print("Y: " +str(Y))
+        #print(X.shape)
+
+        ME = Model_Evaluation(X, Y, trait)
+        ME.compare_scores(save)
+    print("-------------------End All Traist---------------")
+    save.write("-------------------End All Traist---------------")
+    save.close()
+
