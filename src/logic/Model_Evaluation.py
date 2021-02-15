@@ -52,6 +52,8 @@ class Model_Evaluation():
     
     def compare_scores(self, save):
         
+        print('Model performance for trait ' + self.trait + ' prediction:' + '\n')
+        
         accuracy_scores = []
         f1_scores = []
 
@@ -59,22 +61,36 @@ class Model_Evaluation():
             model = self.model_dic[model_name]
             model.fit(self.X_train, self.y_train)
 
+            print(model_name + ": ")
+
             if regression:
                 y_pred = model.predict(self.X_test)
                 y_true = self.y_test
                 mse = -np.mean(cross_validate(model, self.X_test, self.y_test, scoring='neg_mean_squared_error', cv=10)['test_score'])
+                print('MSE: ' + str(mse) + '\n')
             else:
                 accuracy_score = np.mean(cross_validate(model, self.X_test, self.y_test, cv=10)['test_score'])
                 accuracy_scores.append(accuracy_score)
+                print('Accuracy score: ' + str(accuracy_score) + '\n')
 
                 f_score = np.mean(cross_validate(model, self.X_test, self.y_test, scoring='f1', cv=10)['test_score'])
                 f1_scores.append(f_score)
+                print('F1 score: ' + str(f_score) + '\n')
 
         best_accuracy_score = max(accuracy_scores)
         best_accuracy_model, d = self.models[accuracy_scores.index(best_accuracy_score)]
-        
+        print(
+            '*****Best Accuracy score for ' + str(self.trait) + ': '  + str(best_accuracy_score) + '\n' +
+            'Model: ' + best_accuracy_model + '\n' + '\n'
+        )
         best_f1_score = max(f1_scores)
         best_f1_model, r = self.models[f1_scores.index(best_f1_score)]
+        print(
+            '*****Best F1 score for ' + str(self.trait) + ': ' + str(best_f1_score) + '\n' +
+            'Model: ' + best_f1_model + '\n\n\n'
+        )
+        print('----------End Model performance for trait ' + self.trait + ' prediction-------------' + '\n')
+
 
 def prep_data(trait,dp, regression=False, model_comparison=False):
         df_status = dp.extract_text_from_corpus()
