@@ -49,3 +49,16 @@ class Predictor():
 
         return result
     
+    def print_Pred(self, prediction, X):
+        result = []
+        result.append("Evaluated Text: " + X[0])
+        for t, v in prediction.items():
+            s = t.split('_')
+            try:
+                k = s[2]
+            except:
+                k = s[1]
+            text = '*Predicting the ' +str(self.dicname[k]) + ' The Result ->:  ' +  str(v) 
+            print(text + ': \n' + '\n')
+            result.append(text)
+        return result
