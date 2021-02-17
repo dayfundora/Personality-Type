@@ -16,3 +16,14 @@ class Predictor():
 
         }
 
+    def load_models(self):
+        r = ['categorical', 'regression']
+        #M = Model(vetorice)
+        #train_models(vetorice)
+        for trait in self.traits:
+            #for type_ in r:
+                #SITE_ROOT = os.path.dirname(__file__)
+                #filename = os.path.join(SITE_ROOT,'models/{1}_{0}_model_liwc.pkl'.format(type_, trait))
+                #sys.path.append(r'filename')
+            with open('logic/models/{1}_categorical_model_{0}.pkl'.format(self.vetorice, trait), 'rb') as f:
+                self.models[trait] = pickle.load(f)
