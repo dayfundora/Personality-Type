@@ -16,3 +16,17 @@ class FBScraper():
  
         y = self.set_browser(browser)
         self.dic_status = {}
+
+    def set_browser(self, browser):
+        #Firefox
+        if browser == 'Firefox':
+            profile = FirefoxProfile()
+            profile.set_preference("dom.webnotifications.enabled", False)
+            self.browser = Firefox(firefox_profile=profile)
+            
+        #Chrome
+        if browser == 'Chrome':
+            options = ChromeOptions()
+            options.add_argument("--disable-notifications")
+            self.browser = Chrome(options=options)
+
