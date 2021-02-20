@@ -29,4 +29,17 @@ class FBScraper():
             options = ChromeOptions()
             options.add_argument("--disable-notifications")
             self.browser = Chrome(options=options)
+    def open_fb(self):
+        #Login to FB in Selenium Browser
+        url = 'http://www.facebook.com/'
+        self.browser.get(url)
 
+        email =self.browser.find_element_by_id('email')
+        password = self.browser.find_element_by_id('pass')
+
+        email.send_keys(self.first_email)
+        password.send_keys(self.first_password)
+
+        self.browser.find_element_by_id("loginbutton").click()
+
+   
