@@ -75,5 +75,14 @@ def searched_statuses(self):
         save.write(text)
         save.close()   
 
+def predict_Face(self):
+        p = Predictor()
+        f = open ('logic/data/post.txt','r')
+        mensaje = f.read()
+        print(mensaje)
+        f.close()
+
+        r = p.predict([mensaje])
+        return r
     
    
