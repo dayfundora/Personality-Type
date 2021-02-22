@@ -99,6 +99,7 @@ def ExecFace():
     FBS.open_fb()
     FBS.searched_statuses()
     p = FBS.predict_Face()
+    print("Prediccion: " + str(p))
 
 if __name__ == '__main__':
     ExecFace()
