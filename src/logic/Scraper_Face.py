@@ -84,5 +84,21 @@ def predict_Face(self):
 
         r = p.predict([mensaje])
         return r
-    
-   
+
+def ExecFace():
+    with open('logic/fb_login_creds.yaml', 'r') as credlog:
+        try:
+            yread = yaml.load(credlog, Loader=yaml.FullLoader)
+            password = yread['password']
+            email = yread['email']
+            profile = yread['profile_url']
+        except yaml.YAMLError as exc:
+            print(exc)
+
+    FBS = FBScraper(email = email, password = password, profile = profile, browser = 'Firefox')
+    FBS.open_fb()
+    FBS.searched_statuses()
+    p = FBS.predict_Face()
+
+if __name__ == '__main__':
+    ExecFace()
