@@ -13,5 +13,20 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
 
+
+@app.route("/", methods= ['GET', 'POST'])
+def index():
+    #global model
+    #model = Model()
+    #train_models()
+    #train_models('tfidf')
+    
+    if request.method == 'POST':
+        global textpredict
+        textpredict = request.form['text']
+        return predecir_texto()
+    return render_template('index.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
