@@ -16,16 +16,20 @@ app = Flask(__name__)
 
 @app.route("/", methods= ['GET', 'POST'])
 def index():
-    #global model
-    #model = Model()
-    #train_models()
-    #train_models('tfidf')
-    
     if request.method == 'POST':
         global textpredict
         textpredict = request.form['text']
-        return predecir_texto()
+        return predict_text()
     return render_template('index.html')
+
+def predict_text():
+    if textpredict is not None:
+        p = Predictor()
+        global prediction
+        prediction = p.predict([textpredict])
+        return redirect(url_for('result'))
+    else:
+        return str("-----------No Text to Predict------------")
 
 
 if __name__ == '__main__':
