@@ -31,6 +31,11 @@ def predict_text():
     else:
         return str("-----------No Text to Predict------------")
 
+@app.route("/result/", methods= ['GET', 'POST'])
+def result():
+    #input(prediction)
+    nombre = prediction.pop(0)
+    return render_template('result.html', pred= prediction, nom = nombre)
 
 if __name__ == '__main__':
     app.run(debug=True)
