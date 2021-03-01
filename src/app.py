@@ -31,9 +31,24 @@ def predict_text():
     else:
         return str("-----------No Text to Predict------------")
 
+@app.route("/facebook/", methods= ['GET', 'POST'])
+def facebook():     
+    if request.method == 'POST':
+        try:
+            email = request.form['email']
+            passw = request.form['passw']
+            profile = request.form['profile']
+            write_yaml(email, passw, profile)
+            prediction  = ExecFace()
+            return redirect(url_for('result'))
+            
+        except: 
+            prediction  = ExecFace()
+            return redirect(url_for('result'))
+    return render_template('facebook.html')
+
 @app.route("/result/", methods= ['GET', 'POST'])
 def result():
-    #input(prediction)
     nombre = prediction.pop(0)
     return render_template('result.html', pred= prediction, nom = nombre)
 
