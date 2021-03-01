@@ -52,5 +52,11 @@ def result():
     nombre = prediction.pop(0)
     return render_template('result.html', pred= prediction, nom = nombre)
 
+def write_yaml(nemail, npassword, nprofile):
+    data = dict(
+    email= nemail, password= npassword, profile_url= nprofile)
+    with open('logic/Fb_login_creds.yaml', 'w') as outfile:
+        yaml.dump(data, outfile, default_flow_style=False)
+
 if __name__ == '__main__':
     app.run(debug=True)
