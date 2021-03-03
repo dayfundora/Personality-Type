@@ -28,3 +28,6 @@ To install it all:
 pip install requeriments.txt
 ```
 
+### Documentation
+For a more in-depth documentation read [here](https://github.com/dayfundora/Personality-Type/blob/9b1755003480280821d40af5041032f1e07a854c/doc/report.pdf)
+
